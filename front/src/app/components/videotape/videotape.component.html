@@ -1,0 +1,35 @@
+<ul class="video-list ">
+    <ng-container *ngIf="_up_data && _up_data.length">
+        <li *ngFor="let item of _up_data; let i = index" class="pos-r video ">
+            <div class="video-name" fxLayout="row" fxLayoutAlign="start center" >
+                 <span>{{
+                    item &&
+                        item.substr(item.lastIndexOf('/') + 1, 6) +
+                            '…' +
+                            item.substr(item.lastIndexOf('/') + 7, 4) +
+                            '.mp4'
+                }}</span>
+            </div>
+        </li>
+    </ng-container>
+
+    <ng-container *ngIf="_videos && _videos.length">
+        <li *ngFor="let item of _videos" class="pos-r">
+            播放
+        </li>
+    </ng-container>
+
+    <li></li>
+</ul>
+
+<!-- <div class="add-image-small" fxLayout="row" (click)="videotape()" fxLayoutAlign="start center">
+    <ion-icon name="cloud-upload" mode="ios"></ion-icon>
+    <p>上传视频</p>
+</div> -->
+
+<progress-bar
+    [value]="uploadPercentage / 100"
+    *ngIf="uploadPercentage"
+    [color]="uploadPercentage == 100 ? 'success' : ''"
+></progress-bar>
+<input type="file" multiple="multiple" (change)="testHandle($event)" />

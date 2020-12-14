@@ -1,0 +1,101 @@
+<div class="flex mt-10">
+  <div class="f-l pro">
+    <span>完成进度：</span>
+    <span>{{
+      alreadyUploadQueue.length +
+        "/" +
+        (alreadyUploadQueue.length + queue.length)
+    }}</span>
+  </div>
+  <div class="f-r pro">
+    <span>当前状态：</span>
+    <span [style.color]="uQueue.status ? '#10dc60' : 'red'">{{
+      uQueue.status ? "上传中…" : "暂停中"
+    }}</span>
+  </div>
+  <div>
+    <button
+      [hidden]="true"
+      (click)="uQueue.suspend()"
+      id="suspend"
+      color="danger"
+      fill="outline"
+      [disabled]="isSuspend"
+      size="small"
+      class="f-r mr-10"
+    >
+      暂停
+    </button>
+    <button
+      [hidden]="true"
+      (click)="uQueue.restart()"
+      id="restart"
+      size="small"
+      fill="outline"
+      [disabled]="!isSuspend"
+      class="f-r"
+    >
+      重新开始
+    </button>
+  </div>
+</div>
+
+<div scrollable (ionChange)="segmentChanged($event)">
+  <div value="uploading">
+    <span>上传中</span>
+  </div>
+  <div value="uploaded">
+    <span>已上传</span>
+  </div>
+</div>
+
+<div class="title">
+  <span class="name">上传项目</span>
+  <span class="progress">上传进度</span>
+  <span class="size-t">文件大小</span>
+  <span class="do" *ngIf="uploadStatus == 'uploading'">操作</span>
+</div>
+<div *ngIf="uploadStatus == 'uploading'" class="content">
+  <div *ngFor="let item of queue; let index = index">
+    <span class="name">
+      <!-- {{ inspectFieldMap[item.payload.type] }} -->
+    </span>
+    <progress-bar
+      [color]="
+        isSuspend ? 'danger' : item.percentage < 1 ? 'success' : 'primary'
+      "
+      class="progress"
+      value="{{ item.percentage ? item.percentage / 100 : 0 }}"
+    ></progress-bar>
+    <span class="size-t">{{
+      (item.size / 1024 / 1024).toFixed(2) + "MB"
+    }}</span>
+    <div class="w-10">
+      <button
+        size="small"
+        (click)="cancel()"
+        color="danger"
+        class="do"
+        [hidden]="index !== 0 || !uQueue.status"
+      >
+        取消
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="uploadStatus == 'uploaded'">
+  <div *ngFor="let item of alreadyUploadQueue">
+    <span class="name">
+      <!-- {{ inspectFieldMap[item.payload.type] }} -->
+    </span>
+    <progress-bar
+      color="success"
+      class="progress"
+      value="{{ item.percentage / 100 }}"
+    ></progress-bar>
+    <span class="size-t">{{
+      (item.size / 1024 / 1024).toFixed(2) + "MB"
+    }}</span>
+  </div>
+</ng-container>

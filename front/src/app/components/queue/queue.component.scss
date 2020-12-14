@@ -1,0 +1,69 @@
+.container {
+    position: sticky;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    background: white;
+    height: 200px;
+}
+
+.name {
+    width: 25%;
+    font-size: 13px;
+}
+
+.progress {
+    font-size: 13px;
+    width: 55%;
+}
+
+.size-t{
+    font-size: 13px;
+    text-align: center;
+    width: 10%;
+}
+
+.do{
+    font-size: 13px;
+    text-align: center;
+    // width: 100%;
+}
+
+.w-10{
+    width: 10% !important;
+}
+
+.f-r{
+    float: right;
+}
+
+.mt-10{
+    margin-top: 10px !important;
+}
+
+.mr-10{
+    margin-right: 10px !important;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pro{
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #3880ff;
+}
+
+.title{
+    
+}
+
+.content{
+    height: calc(100% - 200px);
+    overflow-y: scroll;
+}

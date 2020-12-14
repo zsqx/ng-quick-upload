@@ -1,0 +1,29 @@
+ul {
+    padding: 2px 0;
+    li {
+        float: left;
+    }
+    li.video {
+        .pos-a {
+            z-index: 999;
+            background: rgba(1, 1, 1, 0.5);
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+            border-radius: 100%;
+            right: 0px;
+            color: #fff;
+            top: -10px;
+        }
+    }
+}
+
+.add-image-small{
+    display: inline-flex !important;
+}
+
+ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
