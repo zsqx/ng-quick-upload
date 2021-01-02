@@ -19,7 +19,7 @@ module.exports = async function (hash) {
     const readFiles = fs.readdirSync('./static/files');
     const readChunks = fs.readdirSync('./static/chunks');
     //先去遍历合并完成的文件夹
-    let hasFile = readFiles.find(fileName => hash.indexOf(fileName) !== -1);
+    let hasFile = readFiles.find(fileName => fileName.indexOf(hash) !== -1);
     if (hasFile) {
         response = {
             status: 0,
@@ -38,7 +38,8 @@ module.exports = async function (hash) {
                 arr.push(fileName);
             }
         })
-        return response = {
+        
+        return response = { 
             status: 1,
             message: '需要上传',
             data: {

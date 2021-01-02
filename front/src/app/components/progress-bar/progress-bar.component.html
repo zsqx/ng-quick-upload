@@ -1,3 +1,11 @@
-<div>
-    {{value}}
+<div class="back">
+  <div class="progress">
+    <div
+      class="inner"
+      [ngStyle]="{ width: value + '%', 'background-color': color }"
+    ></div>
+  </div>
+  <div class="text">{{ value + "%" }}</div>
 </div>
+
+<!-- {{ value }} -->    

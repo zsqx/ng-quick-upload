@@ -55,16 +55,20 @@ router.get('/', async (ctx, next) => {
 router.post('/upload', async (ctx, next) => {
     //此地判断是图片还是视频
     if (ctx.request.body.upload_type === 'fileVerify') {
-        const res = await verify(ctx.request.body.filehash)
+        const res = await verify(ctx.request.body.fileHash)
         ctx.response.body = res;
         return;
     } else if (ctx.request.body.upload_type === 'merge') {
-        merge(ctx);
-        console.log(ctx.request.body.fileHash);
-        ctx.response.body = '1';
+        const res = await merge(ctx);
+        ctx.response.body = res;
         return
-    } else write(ctx);
-   
+    } else {
+        
+        const res = await write(ctx);
+        ctx.response.body = res;
+        return;
+    }
+
     //  upload(ctx);
 })
 

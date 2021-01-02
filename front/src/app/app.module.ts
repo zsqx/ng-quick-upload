@@ -7,6 +7,8 @@ import { VideotapeComponent } from './components/videotape/videotape.component';
 import { QueueComponent } from './components/queue/queue.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { ItemComponent } from './components/item/item.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     PhotographComponent,
     VideotapeComponent,
     QueueComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    ItemComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

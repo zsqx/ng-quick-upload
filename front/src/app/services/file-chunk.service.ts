@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CHUNK_SIZE } from '../config';
 
 export interface Chunk {
     file: Blob;
@@ -8,7 +9,7 @@ export interface Chunk {
     providedIn: 'root',
 })
 export class FileChunkService {
-    SIZE: number = 30 * 1024 * 1024; //切片10M     * 1024;
+    SIZE: number = CHUNK_SIZE;
     file: Blob;
     constructor() {}
 

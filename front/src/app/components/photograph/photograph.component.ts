@@ -5,7 +5,7 @@ import {
   HashCode,
 } from "src/app/services/upload-queue.service";
 import { environment } from "src/environments/environment";
-import { filter,  } from "rxjs/operators";
+import { filter } from "rxjs/operators";
 import { Observable } from "rxjs";
 
 @Component({
@@ -14,8 +14,8 @@ import { Observable } from "rxjs";
   styleUrls: ["./photograph.component.scss"],
 })
 export class PhotographComponent implements OnInit {
-  type: string = 'custom'; //图片类型 （验货字段）
-  
+  type: string = "custom"; //图片类型 （验货字段）
+
   @Input() set photos(input: string[]) {
     if (!input) {
       input = [];
@@ -45,7 +45,6 @@ export class PhotographComponent implements OnInit {
       .asObservable()
       .pipe(filter((node) => node.type === "img"))
       .subscribe((res: any) => {
-        
         // console.log('----------- 图片路径回流 ----------', res.path,res.type);
         this._photos.push(that.imgOrigin + res.path);
       });

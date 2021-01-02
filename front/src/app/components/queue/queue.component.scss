@@ -1,69 +1,133 @@
-.container {
-    position: sticky;
-    right: 0;
-    top: 0;
-    z-index: 999;
-    width: 100%;
-    background: white;
-    height: 200px;
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.name {
-    width: 25%;
-    font-size: 13px;
-}
+.root{
+     width: 1000px;
+     height: auto;
+     border: 1px solid #e0e0e0;
+     border-top: 0;
+     box-sizing: border-box;
+ }
 
-.progress {
-    font-size: 13px;
-    width: 55%;
-}
+ .flex{
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+ }
 
-.size-t{
-    font-size: 13px;
-    text-align: center;
-    width: 10%;
-}
+ .tips{
+     background-image: url("../../../assets/img/could1.png");
+     background-size: 100%;
+     background-position: revert;
+     justify-content: space-between !important;
+     padding: 10px 5px;
+     box-sizing: border-box;
+     position: relative;
+     font-weight: bold;
+     z-index: 100;
+     background-color: #fff;
+    //  box-shadow: 0px 1px 3px 0px #c7c7c7;
+ }
 
-.do{
-    font-size: 13px;
-    text-align: center;
-    // width: 100%;
-}
+ button{
+     background: none;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     cursor: pointer;
+     padding: 5px 10px ;
+     margin-left: 10px;
+     outline: none;
+ }
+ 
 
-.w-10{
-    width: 10% !important;
-}
+ button:hover{
+     background: #1890ff;
+     border-color: #1890ff;
+     color: white;
+ }
 
-.f-r{
-    float: right;
-}
+ .do-main{
+     position: relative;
+     margin-top: -4px;
+     .t{
+        color:#757575;
+        font-size: 4px;
+        font-weight: bold;
+        width: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+        background-color: #dce1e4;
+     }
+     
+     >div{
+         float: left;
+         width: 45%;
+         height: 400px;
+         text-align: center;
+         box-sizing: border-box;
+         .title{
+            font-weight: bold;
+             padding: 10px 0;
+            border-bottom: 1px solid #ececec;
+             .progress{
+                 width: 40%;
+             }
+            span{
+                display: inline-block;
+                width: 20%;
+                font-size: 14px;
+                color: #999;
+            }
+         }
+     }
+     >div:first-child{
+         width: 55%;
+         border-right: 1px solid #e0e0e0;
+     }
+     .uploaded{
+         .title{
+             span{
+                 width: 33.33%;
+             }
+         }
+     }
 
-.mt-10{
-    margin-top: 10px !important;
-}
-
-.mr-10{
-    margin-right: 10px !important;
-}
-
-.flex{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.pro{
-    margin-left: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #3880ff;
-}
-
-.title{
     
+ }
+
+ .do-main::after{
+     content: "";
+     display: block;
+     clear: both;
+ }
+
+ .do-main::before{
+     content: "";
+     display: table;
+ }
+ .scroll{
+     height: calc(100% - 66px);
+     overflow-y: scroll;
+ }
+
+ .w15{
+    width: 15% !important;
 }
 
-.content{
-    height: calc(100% - 200px);
-    overflow-y: scroll;
+.w25{
+    width: 25% !important;
+}
+
+.w30{
+    width: 30% !important;
+}
+.w50{
+    width: 50% !important;
+}
+.w20{
+    width: 20% !important;
 }

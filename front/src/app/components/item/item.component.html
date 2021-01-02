@@ -1,0 +1,26 @@
+<ul class="content">
+  <li
+    class="name"
+    [ngStyle]="{ width: type === 'already' ? '30%' : '25%' }"
+    [title]="_node.name"
+  >
+    {{ _node.name }}
+  </li>
+  <li [ngStyle]="{ width: type === 'already' ? '50%' : '40%' }">
+    <progress-bar
+      [color]="_color"
+      class="progress"
+      [value]="_node.percentage ? _node.percentage : 0"
+    ></progress-bar>
+  </li>
+
+  <li
+    class="size-t"
+    [ngStyle]="{ width: type === 'already' ? '20%' : '20%' }"
+  >
+    {{ (_node.size / 1024 / 1024).toFixed(2) + "MB" }}
+  </li>
+  <li *ngIf="type === 'uploading'" class="w15">
+    <span size="small" color="danger" class="do cancel"> 取消 </span>
+  </li>
+</ul>

@@ -1,22 +1,36 @@
 const fs = require("fs");
+const CONFIG = require("./config");
 
 module.exports = async function (ctx) {
-  console.log(ctx.request.files["chunk"]);
-  // 创建可读流
-  const reader = fs.createReadStream(ctx.request.files["chunk"]["path"]);
-  let filePath = `./static/chunks/` + `${ctx.request.body.hash}`;
-  // 创建可写流
-  const upStream = fs.createWriteStream(filePath);
-  // 可读流通过管道写入可写流
-  reader.pipe(upStream);
-  // TODO 此地需要给前端给一个可以合并的状态
-  // JSON.parse(next.data).data &&
-  // JSON.parse(next.data).data.canMerge === true
-  return (ctx.body = {
-    status: 1,
-    message: "文件上传成功",
-    data: {
-      status: 1,
-    },
-  });
+  const file = ctx.request.files["file"] ? ctx.request.files["file"] : ctx.request.files["chunk"];
+  //接收前端的type字段  -> "file" | "chunk"
+  const { type, hash, cutNum, index } = ctx.request.body;
+
+  const name = type === "file" ? file.name : hash;
+  const filePath = `./static/${type}s/` + `${name}`;
+
+  console.log(cutNum, index + 1);
+
+  try {
+    // 创建可读流
+    const reader = fs.createReadStream(file.path);
+    // 创建可写流
+    const upStream = fs.createWriteStream(filePath);
+    // 可读流通过管道写入可写流
+    reader.pipe(upStream);
+  } catch (error) {
+    console.log(error);
+
+  }
+
+
+  //如果切片总数等于当前index 则给前端返回canMerge
+  const canMerge = cutNum && Number(cutNum) === Number(index) + 1;
+  return {
+    code: 200,
+    message: `${type === "file" ? '文件' : '切片'}上传成功`,
+    data: canMerge ? { canMerge } : filePath,
+  };
+
+
 };
