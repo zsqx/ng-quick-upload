@@ -43,7 +43,7 @@ export class PhotographComponent implements OnInit {
     let that = this;
     this.uQueue.alreadyUploadPayload$
       .asObservable()
-      .pipe(filter((node) => node.type === "img"))
+      .pipe(filter((node) => node.type === "file"))
       .subscribe((res: any) => {
         // console.log('----------- 图片路径回流 ----------', res.path,res.type);
         this._photos.push(that.imgOrigin + res.path);
@@ -92,13 +92,14 @@ export class PhotographComponent implements OnInit {
     Array.prototype.map.call(e.target.files, (file: File) => {
       params.hash = HashCode(params.type);
 
-      this.uQueue.add({
-        type: "img",
-        size: file.size,
-        blob: file,
-        payload: params,
-        hash: HashCode(params.type),
-      });
+      // this.uQueue.add({
+      //   type: "file",
+      //   name: file.name,
+      //   size: file.size,
+      //   blob: file,
+      //   payload: params,
+      //   hash: HashCode(params.type),
+      // });
     });
   }
 

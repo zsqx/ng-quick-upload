@@ -68,12 +68,12 @@ export class VideotapeComponent implements OnInit {
 
   testHandle(e: any) {
     const file = e.target.files[0];
-    this.uQueue.add({
-      type: "video",
-      size: file.size,
-      blob: file,
+    // this.uQueue.add({
+    //   type: "file",
+    //   size: file.size,
+    //   blob: file,
 
-    });
+    // });
   }
 
   async handleFile(res?: any, filePath?: string) {

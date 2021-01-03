@@ -17,9 +17,11 @@ export interface UploadPayload {
   chunk: Blob;
   type: string;
   upload_type?: "upload" | "merge" | "fileVerify";
-  hash: number;
+  hash?: number;
   fileHash?: number;
   sort_index?: number;
+  cutNum?: number;
+  index?: number
 }
 
 export interface QueueNode<T> {
@@ -72,7 +74,7 @@ export class UploadQueueService {
     private fileHash: FileHashService,
     private http: HttpClient,
     private request: RequestService
-  ) {}
+  ) {} 
   num: number = 0;
   /**
    * 向已上传队列里增加成员
@@ -174,7 +176,7 @@ export class UploadQueueService {
    */
   async packingFile(ele: QueueNode<any>) {
     ele.payload = {};
-    //此地做视频分片 断点续传功能
+    //此地做问价分片 断点续传功能
     //文件切片
     const fileChunkList = await this.fileChunk.handleFile(ele.blob);
     //主动将整个Blob置为null 释放内存
@@ -344,7 +346,7 @@ export class UploadQueueService {
   ) {
     //组装成QueueNode
     //Push到上传队列
-    const data: QueueNode<UploadPayload>[] = fileChunkList
+    const data: Array<any> = fileChunkList    //QueueNode<UploadPayload>
       //组装为切片
       .map(({ file }, index) => {
         let obj = {
@@ -357,15 +359,15 @@ export class UploadQueueService {
         };
         obj.payload = {
           cutNum: fileChunkList.length,
-          file_hash: ele.payload.hash,
-          hash: ele.payload.hash + "__" + index,
+          fileHash: ele.payload.hash,
+          hash: ele.payload.hash + "__" + index as any,
           index: index,
           upload_type: "upload",
         };
         return obj;
       })
       //筛选未上传的切片
-      .filter(({ payload: { hash } }) => !uploadedList.includes(hash));
+      .filter(({ payload: { hash } }) => !uploadedList.includes(hash as any));
     ele.already = uploadedList.length;
     ele.chunks = data;
     /**
@@ -374,7 +376,7 @@ export class UploadQueueService {
      *  此时直接进行合并操作
      * */
     if (fileChunkList.length === uploadedList.length) {
-      let node: QueueNode<UploadPayload> = {
+      let node:any = {  // QueueNode<UploadPayload>
         type: null,
         size: null,
         payload: {
